@@ -63,22 +63,23 @@
 		<!-- Start SubHeader -->
 		<div class="row" id="sub-header">
 		
-		{% url "groups" as groupsz %}
-		{% url "home" as homez %}
-		<!-- {% url "journal" as journalz %} -->
+		<!-- переменные для линков -->
+		{% url "groups" as groups_linc %}
+		{% url "home" as home_linc %} 
+		{% url "journal" as journal_linc %}
 
 		
 			
 			<div class="col-xs-12">
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" 
-						{% if request.path == homez %}class="active"{% endif %}>
+						{% if request.path == home_linc %}class="active"{% endif %}>
 						<a href="{% url "home" %}">Студенти</a></li>
 					<li role="presentation"
-						{% if '/journal' in request.path %}class="active"{% endif %}>
-						<a href="/journal">Відвідування</a></li>
+						{% if journal_link in request.path %}class="active"{% endif %}>
+						<a href="{% url "journal" %}">Відвідування</a></li>
 					<li role="presentation"
-						{% if groupsz in request.path %}class="active"{% endif %}>
+						{% if groups_linc in request.path %}class="active"{% endif %}>
 						<a href="{% url "groups" %}">Групи</a></li>
 				</ul>
 			</div>
@@ -118,7 +119,8 @@
 	</div>
 	<!-- End Container -->
 
-
+<p></p> 
+<p>служебная инфа</p>
 <p>{{ groupsz }}</p>
 <p>URL of this page: {{ request.path }}</p>
 

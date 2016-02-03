@@ -54,7 +54,9 @@ footer */
 
 /*подвинул кнопку вниз*/
 .qwert{
-	margin-top: 20px;
+	margin-top: -45px;
+	/*float:right;*/
+	width: 150px;
 }
 
 
@@ -67,10 +69,14 @@ ul.hr li{
 }
 
 
-/*выравнивание шапки по центру*/
+
 thead tr th{
-	/*text-align: center;*/
 	font-size: 13px;
+}
+
+/*выравнивание шапки по центру в журнале*/
+.centr th{
+	text-align: center;
 }
 
 .mywidth{width:13%;}

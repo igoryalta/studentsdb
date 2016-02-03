@@ -8,7 +8,8 @@
 
 {% block content %}
 <!-- Add Student Button -->
-<div class="col-xs-2">
+<!-- <div class="col-xs-2"> -->
+<div>
 	<a class="btn btn-primary pull-right qwert" href="{% url "groups_add" %}">Додати Групу</a>
 </div>
 
@@ -59,15 +60,17 @@
 	</tbody>
 </table>
 <!-- End Students Listing -->
+
 <!-- начало навигация -->
-<nav>
-	<ul class="pagination">
-		<!-- <li><a href="#">&laquo;</a></li> -->
-		<li><a href="#">1</a></li>
-		<li class="active"><a href="#">2</a></li>
-		<li><a href="#">Далi</a></li>
-		<!-- <li><a href="#">&raquo;</a></li> -->
-	</ul>
-</nav>
+{% include 'students/navi.html' %}
+		<!-- <nav>
+			<ul class="pagination"> -->
+							<!-- <li><a href="#">&laquo;</a></li> -->
+				<!-- <li><a href="#">1</a></li>
+				<li class="active"><a href="#">2</a></li>
+				<li><a href="#">Далi</a></li> -->
+							<!-- <li><a href="#">&raquo;</a></li> -->
+		<!-- 	</ul>
+		</nav> -->
 <!-- конец навигация -->
 {% endblock content %}
