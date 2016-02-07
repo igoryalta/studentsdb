@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'students',
+    # 'django.contrib.sites',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -66,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'studentsdb.context_processors.students_proc', # ya dobavil
+                'studentsdb.context_processors.students_proc',
             ],
         },
     },
@@ -108,7 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -136,3 +138,10 @@ PORTAL_URL = 'http://localhost:8000'
 #     "django.core.context_processors.request",
 #     "studentsdb.context_processors.students_proc",
 # )
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'media')
+
+
+# SITR_ID=1
