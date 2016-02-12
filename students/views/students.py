@@ -41,15 +41,15 @@ from django.http import HttpResponse
 
 from ..models import Student
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+
 
 def students_list(request):
 	students = Student.objects.all()
 
-
 	# try to order students list
-	
 	# reverse = ''
-
 	order_by = request.GET.get('order_by', '')
 	
 	if order_by == '':
@@ -57,18 +57,32 @@ def students_list(request):
 		st_def = '1'
 	else:
 		st_def ='0'	
-	# получаем в GET запросе параметр order_by, когда пользователь щелкнет по ссылке 
-	#  <a href={% url "home" %}?order_by=last_name>Фамилия&uarr;</a> 
-	# GET вернет нам в order_by - last_name or first_name or ticket
-	# параметр запроса сразу за знаком ?
-	# если пользователь не щелкал по ссылке, то order_by - пустой, и мы присваиваем ему значение 'last_name'
-	# это мы устанавливаем сотрировку вывода по умолчанию по этому полю
-
-
+    #	комент
+		# получаем в GET запросе параметр order_by, когда пользователь щелкнет по ссылке 
+		#  <a href={% url "home" %}?order_by=last_name>Фамилия&uarr;</a> 
+		# GET вернет нам в order_by - last_name or first_name or ticket
+		# параметр запроса сразу за знаком ?
+		# если пользователь не щелкал по ссылке, то order_by - пустой, 
+		# и мы присваиваем ему значение 'last_name'
+		# это мы устанавливаем сотрировку вывода по умолчанию по этому полю
 	if order_by in ('last_name', 'first_name', 'ticket', 'id'):
 		students = students.order_by(order_by)
 		if request.GET.get('reverse', '') == '1':
 			students = students.reverse()
+
+	# paginate students
+	paginator = Paginator(students, 3)
+	page = request.GET.get('page')
+	try:
+		students = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+		students = paginator.page(1)
+	except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver
+		# last page of results.
+		students = paginator.page(paginator.num_pages)
+
 
 	return render(request, 'students/students_list.html',
 		{'students': students, 'st_def' : st_def})
