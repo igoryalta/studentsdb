@@ -85,15 +85,19 @@ WSGI_APPLICATION = 'studentsdb.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, '..', 'db.sqlite3'),
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'localhost',
-        'USER': 'students_db_user',
-        'PASSWORD': 'zxcv',
-        'NAME': 'students_db',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'HOST': 'localhost',
+#         'USER': 'students_db_user',
+#         'PASSWORD': 'zxcv',
+#         'NAME': 'students_db',
+#     }
+# }
+# We moved DATABASES variable to db.py module which added to .gitignore
+# so we don't keep mysql passwords in repository
+from .db import DATABASES
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
