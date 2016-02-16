@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'studentsdb.wsgi.application'
 #         'ENGINE': 'django.db.backends.mysql',
 #         'HOST': 'localhost',
 #         'USER': 'students_db_user',
-#         'PASSWORD': 'zxcv',
+#         'PASSWORD': '****',
 #         'NAME': 'students_db',
 #     }
 # }
