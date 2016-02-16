@@ -14,46 +14,40 @@ from django.http import HttpResponse
 # 		return HttpResponse('<h1>Hello Word</h1>')
 
 
-# Views for Students
-# def students_list(request):
-# 	return render(request, 'students/students_list.html', {})
 
-# def students_list(request):
-# 	students = (
+# # Views for Groups
+# def groups_list(request):
+# 	groups = (
 # 		{'id': 1,
-# 		 'first_name': u'Віталій',
-# 		 'last_name': u'Подоба',
-# 		 'ticket': 235,
-# 		 'image': 'img/1.jpg'},
+# 		 'groups_name': u'МтМ-21',
+# 		 'star_name': u'Ячменев Олег'},
 # 		{'id': 2,
-# 		 'first_name': u'Корост',
-# 		 'last_name': u'Андрій',
-# 		 'ticket': 2123,
-# 		 'image': 'img/2.jpg'},
+# 		 'groups_name': u'МтМ-22',
+# 		 'star_name': u'Онов Дмитро'},
 # 		{'id': 3,
-# 		 'first_name': u'Остов',
-# 		 'last_name': u'Степан',
-# 		 'ticket': 2123,
-# 		 'image': 'img/3.jpg'},
-# 	)
-# 	return render(request, 'students/students_list.html',
-# 		{'students': students})
+# 		 'groups_name': u'МтМ-23',
+# 		 'star_name': u'Чамин Степан'},
+# 	)	
+# 	return render(request, 'students/groups_list.html',
+# 		{'groups': groups})
 
-from ..models import Student
+
+# from ..models import Group
+from ..models.group_models import Group
+from ..models.student_models import Student
+
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+def groups_list(request):
+	groups = Group.objects.all()
 
-
-def students_list(request):
-	students = Student.objects.all()
-
-	# try to order students list
-	# reverse = ''
+	# try to order groups list
+	
 	order_by = request.GET.get('order_by', '')
 	
 	if order_by == '':
-		order_by = 'last_name'
+		order_by = 'title'
 		st_def = '1'
 	else:
 		st_def ='0'	
@@ -65,35 +59,35 @@ def students_list(request):
 		# если пользователь не щелкал по ссылке, то order_by - пустой, 
 		# и мы присваиваем ему значение 'last_name'
 		# это мы устанавливаем сотрировку вывода по умолчанию по этому полю
-	if order_by in ('last_name', 'first_name', 'ticket', 'id'):
-		students = students.order_by(order_by)
+	if order_by in ('title', 'leader', 'id'):
+		groups = groups.order_by(order_by)
 		if request.GET.get('reverse', '') == '1':
-			students = students.reverse()
+			groups = groups.reverse()
 
-	# paginate students
-	paginator = Paginator(students, 3)
+	# paginate groups
+	paginator = Paginator(groups, 3)
 	page = request.GET.get('page')
 	try:
-		students = paginator.page(page)
+		groups = paginator.page(page)
 	except PageNotAnInteger:
 		# If page is not an integer, deliver first page.
-		students = paginator.page(1)
+		groups = paginator.page(1)
 	except EmptyPage:
 		# If page is out of range (e.g. 9999), deliver
 		# last page of results.
-		students = paginator.page(paginator.num_pages)
+		groups = paginator.page(paginator.num_pages)
 
 
-	return render(request, 'students/students_list.html',
-		{'students': students, 'st_def' : st_def})
+	return render(request, 'students/groups_list.html',
+		{'groups': groups, 'st_def' : st_def})
 
-def students_add(request):
-	return HttpResponse('<h1>Student Add Form</h1>')
-def students_edit(request, sid):
-	return HttpResponse('<h1>Edit Student %s</h1>' % sid)
-def students_delete(request, sid):
-	return HttpResponse('<h1>Delete Student %s</h1>' % sid)
-
+	
+def groups_add(request):
+	return HttpResponse('<h1>Group Add Form</h1>')
+def groups_edit(request, gid):
+	return HttpResponse('<h1>Edit Group %s</h1>' % gid)
+def groups_delete(request, gid):
+	return HttpResponse('<h1>Delete Group %s</h1>' % gid)
 
 
 # from django.shortcuts import render
