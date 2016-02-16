@@ -98,7 +98,6 @@ WSGI_APPLICATION = 'studentsdb.wsgi.application'
 # so we don't keep mysql passwords in repository
 from .db import DATABASES
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
