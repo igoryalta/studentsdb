@@ -48,6 +48,10 @@ urlpatterns = [
 
 	# jornal urls
 	url(r'^journal/$', 'students.views.journal_views.journal_list', name='journal'),
+	
+	# ispit urls
+	url(r'^ispit/$', 'students.views.ispit_views.ispit_list', name='ispit'),
+	
 
 	
 

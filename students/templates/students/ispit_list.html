@@ -1,0 +1,72 @@
+{% extends "students/base.html" %}
+
+{% load static from staticfiles %}
+
+{% block meta_title %}Экзамены{% endblock meta_title %}
+
+{% block title %}Экзамены{% endblock title %}
+
+{% block content %}
+<!-- Add Student Button -->
+<!-- <div>
+	<a class="btn btn-primary pull-right qwert" href="{% url "students_add" %}">Додати Экзамен</a>
+</div> -->
+
+
+<!-- Start Students Listing -->
+<table class="table table-hover table-striped">
+{% with order_by=request.GET.order_by reverse=request.GET.reverse %}
+	<thead>
+		<tr>
+			<th>	
+				<a href="{% url "ispit" %}?order_by=birthday{% if order_by == 'birthday' and reverse != '1' %}&amp;reverse=1{% endif %}{% if st_def == '1' %}&amp;reverse=1{% endif %}">
+					Дата
+					{% if st_def == '1' %}&uarr;{% endif %}
+					{% if order_by == 'birthday' and reverse != '1' %}&uarr;
+					{% elif order_by == 'birthday'	and reverse == '1' %}&darr;
+					{% endif %}</a></th>
+			<th>
+				<a href="{% url "ispit" %}?order_by=predmet_name{% if order_by == 'predmet_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					Назнвание
+					{% if order_by == 'predmet_name' and reverse != '1' %}&uarr;
+					{% elif order_by == 'predmet_name' and reverse == '1' %}&darr;
+					{% endif %}</a></th>
+			<th>
+				<a href="{% url "ispit" %}?order_by=prepad_name{% if order_by == 'prepad_name' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					Преподователь
+					{% if order_by == 'prepad_name' and reverse != '1' %}&uarr;
+					{% elif order_by == 'prepad_name' and reverse == '1' %}&darr;
+					{% endif %}</a></th>
+			<th>
+				<a href="{% url "ispit" %}?order_by=student_group{% if order_by == 'student_group' and reverse != '1' %}&amp;reverse=1{% endif %}">
+					Группа (Староста)
+					{% if order_by == 'student_group' and reverse != '1' %}&uarr;
+					{% elif order_by == 'student_group' and reverse == '1' %}&darr;
+					{% endif %}</a></th>
+		</tr>
+	</thead>
+	{% endwith %}
+	<tbody>						
+		{% for ispit in ispit %}
+		<tr>
+			<td><a href="#">
+				{{ ispit.birthday }}</td>
+			<td><a href="#">
+				{{ ispit.predmet_name }}</td>
+			<td><a href="#">
+				{{ ispit.prepad_name }}</td>
+			<td><a href="#">
+				{{ ispit.student_group }}</td>
+
+		</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+<!-- End Students Listing -->
+
+
+<!-- начало навигация -->
+{% include 'students/navi.html' %}
+<!-- конец навигация -->
+{% endblock content %}

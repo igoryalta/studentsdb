@@ -67,7 +67,7 @@
 		{% url "groups" as groups_linc %}
 		{% url "home" as home_linc %} 
 		{% url "journal" as journal_linc %}
-
+		{% url "ispit" as ispit_linc %}
 		
 			
 			<div class="col-xs-12">
@@ -76,11 +76,14 @@
 						{% if request.path == home_linc %}class="active"{% endif %}>
 						<a href="{% url "home" %}">Студенти</a></li>
 					<li role="presentation"
-						{% if journal_link in request.path %}class="active"{% endif %}>
+						{% if journal_linc in request.path %}class="active"{% endif %}>
 						<a href="{% url "journal" %}">Відвідування</a></li>
 					<li role="presentation"
 						{% if groups_linc in request.path %}class="active"{% endif %}>
 						<a href="{% url "groups" %}">Групи</a></li>
+					<li role="presentation"
+						{% if ispit_linc in request.path %}class="active"{% endif %}>
+						<a href="{% url "ispit" %}">Экзамены</a></li>
 				</ul>
 			</div>
 
@@ -122,6 +125,7 @@
 <p></p> 
 <p>служебная инфа</p>
 <p>{{ groupsz }}</p>
+
 <p>URL of this page: {{ request.path }}</p>
 
 <p>1{{ request.get_full_path }}</p>
