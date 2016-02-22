@@ -51,7 +51,11 @@ urlpatterns = [
 	
 	# ispit urls
 	url(r'^ispit/$', 'students.views.ispit_views.ispit_list', name='ispit'),
-	
+	url(r'^ispit/(?P<sid>\d+)/edit/$',
+		'students.views.ispit_views.ispit_edit',
+		name='ispit_edit'),
+	url(r'^ispit/add/$', 'students.views.ispit_views.ispit_add',
+		name='ispit_add'),
 
 	
 

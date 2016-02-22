@@ -8,9 +8,9 @@
 
 {% block content %}
 <!-- Add Student Button -->
-<!-- <div>
-	<a class="btn btn-primary pull-right qwert" href="{% url "students_add" %}">Додати Экзамен</a>
-</div> -->
+<div>
+	<a class="btn btn-primary pull-right qwert" href="{% url "ispit_add" %}">Додати Экзамен</a>
+</div>
 
 
 <!-- Start Students Listing -->
@@ -49,13 +49,14 @@
 	<tbody>						
 		{% for ispit in ispit %}
 		<tr>
-			<td><a href="#">
+
+			<td><a href="{% url "ispit_edit" ispit.id %}">
 				{{ ispit.birthday }}</td>
-			<td><a href="#">
+			<td><a href="{% url "ispit_edit" ispit.id %}">
 				{{ ispit.predmet_name }}</td>
-			<td><a href="#">
+			<td><a href="{% url "ispit_edit" ispit.id %}">
 				{{ ispit.prepad_name }}</td>
-			<td><a href="#">
+			<td><a href="{% url "ispit_edit" ispit.id %}">
 				{{ ispit.student_group }}</td>
 
 		</tr>
